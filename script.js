@@ -77,6 +77,51 @@ if(canvas){
   drawParticles();
 }
 
-// Contact form
+// Contact form — sends to Flask backend
 const form=document.getElementById('contactForm');
-if(form)form.addEventListener('submit',e=>{e.preventDefault();alert('Thanks for reaching out! I\'ll get back to you soon.');form.reset()});
+if(form){
+  form.addEventListener('submit',async(e)=>{
+    e.preventDefault();
+    const btn=document.getElementById('formBtn');
+    const status=document.getElementById('formStatus');
+    const origText=btn.textContent;
+
+    btn.textContent='Sending...';
+    btn.disabled=true;
+    status.style.display='none';
+
+    const data={
+      name:document.getElementById('formName').value,
+      email:document.getElementById('formEmail').value,
+      subject:document.getElementById('formSubject').value,
+      message:document.getElementById('formMessage').value
+    };
+
+    try{
+      const res=await fetch('/send',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(data)
+      });
+      const result=await res.json();
+
+      status.style.display='block';
+      if(result.success){
+        status.textContent='✅ '+result.message;
+        status.style.color='#06d6a0';
+        form.reset();
+      }else{
+        status.textContent='❌ '+result.error;
+        status.style.color='#ff6b6b';
+      }
+    }catch(err){
+      status.style.display='block';
+      status.textContent='❌ Failed to send. Please try again.';
+      status.style.color='#ff6b6b';
+    }
+
+    btn.textContent=origText;
+    btn.disabled=false;
+    setTimeout(()=>{status.style.display='none'},5000);
+  });
+}
