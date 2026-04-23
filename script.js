@@ -77,7 +77,7 @@ if(canvas){
   drawParticles();
 }
 
-// Contact form — sends to Flask backend
+// Contact form — sends via Web3Forms (no backend password needed)
 const form=document.getElementById('contactForm');
 if(form){
   form.addEventListener('submit',async(e)=>{
@@ -90,28 +90,30 @@ if(form){
     btn.disabled=true;
     status.style.display='none';
 
-    const data={
+    const formData={
+      access_key:'1462d5d2-0984-4875-b85c-1a36a9b5d303',
       name:document.getElementById('formName').value,
       email:document.getElementById('formEmail').value,
-      subject:document.getElementById('formSubject').value,
-      message:document.getElementById('formMessage').value
+      subject:document.getElementById('formSubject').value||'Portfolio Contact',
+      message:document.getElementById('formMessage').value,
+      from_name:'Portfolio Contact Form'
     };
 
     try{
-      const res=await fetch('/send',{
+      const res=await fetch('https://api.web3forms.com/submit',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(data)
+        body:JSON.stringify(formData)
       });
       const result=await res.json();
 
       status.style.display='block';
       if(result.success){
-        status.textContent='✅ '+result.message;
+        status.textContent='✅ Message sent successfully!';
         status.style.color='#06d6a0';
         form.reset();
       }else{
-        status.textContent='❌ '+result.error;
+        status.textContent='❌ '+(result.message||'Failed to send.');
         status.style.color='#ff6b6b';
       }
     }catch(err){

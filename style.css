@@ -118,6 +118,8 @@ section{padding:110px 0;position:relative}
 .project-links a{padding:9px 18px;border-radius:10px;font-size:.85rem;text-decoration:none;font-weight:600;transition:all .3s;display:flex;align-items:center;gap:8px}
 .project-links .gh{background:rgba(139,92,246,.1);color:var(--accent2);border:1px solid rgba(139,92,246,.15)}
 .project-links .gh:hover{background:rgba(139,92,246,.2);border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 15px rgba(139,92,246,.2)}
+.project-links .live{background:rgba(6,214,160,.1);color:var(--cyan);border:1px solid rgba(6,214,160,.2)}
+.project-links .live:hover{background:rgba(6,214,160,.2);border-color:var(--cyan);transform:translateY(-2px);box-shadow:0 4px 15px rgba(6,214,160,.2)}
 
 /* TIMELINE */
 .timeline{position:relative;max-width:820px;margin:0 auto}
