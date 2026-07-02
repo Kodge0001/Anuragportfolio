@@ -11,7 +11,7 @@
 Welcome to my professional portfolio! This repository showcases my journey as a Full-Stack Developer, featuring my projects, skills, and experience in building scalable web applications.
 
 ## 🌐 Live Demo
-Check out the live version here: **[kodge0001.github.io/Anuragportfolio](https://kodge0001.github.io/Anuragportfolio/)**
+Check out the live version here: **[kodge0001.github.io/Anuragportfolio](https://anuragportfolio-six.vercel.app/)**
 
 ---
 
